@@ -1,5 +1,9 @@
 <div id="app">
-  <app-panel id="left"></app-panel>
-  <app-editor id="center"></app-editor>
-  <app-objects id="right"></app-objects>
+  <div id="left">
+    <app-panel></app-panel>
+    <app-images></app-images>
+  </div>
+  
+  <app-editor id="center" [(selectedObject)]="selectedObject"></app-editor>
+  <app-objects id="right" [(selectedObject)]="selectedObject" (updateObject)="onUpdateObject($event)"></app-objects>
 </div>

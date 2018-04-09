@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 export interface Config {
     objects: string;
+    images: string;
     basePath: string;
 }
 

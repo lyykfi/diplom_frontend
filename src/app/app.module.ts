@@ -18,6 +18,9 @@ import { ObjectsDialogsAddComponent } from './components/objects/dialogs/add/ind
 import { EditorComponent } from './components/editor/index.component';
 import { PanelComponent } from './components/panel/index.component';
 
+import { ImagesComponent } from './components/images/index.component';
+import { ImagesDialogsAddComponent } from './components/images/dialogs/add/index.component';
+
 import { ObjectsService } from './objects.service';
 import { ConfigService } from './config/config.service';
 
@@ -28,6 +31,8 @@ import { ConfigService } from './config/config.service';
     EditorComponent,
     PanelComponent,
     ObjectsDialogsAddComponent,
+    ImagesComponent,
+    ImagesDialogsAddComponent,
   ],
   imports: [
     HttpClientModule,
@@ -48,7 +53,8 @@ import { ConfigService } from './config/config.service';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ObjectsDialogsAddComponent
+    ObjectsDialogsAddComponent,
+    ImagesDialogsAddComponent
   ]
 })
 export class AppModule { }

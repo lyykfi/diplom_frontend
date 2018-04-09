@@ -5,3 +5,7 @@
 #objects .material-icons {
     cursor: pointer;
 }
+
+#objects .mat-list-item span {
+    cursor: pointer;
+}

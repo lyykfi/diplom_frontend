@@ -1,0 +1,22 @@
+<div id="objects">
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Images</mat-panel-title>
+            <mat-panel-description>
+                Here the list all images
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="inner">
+            <mat-list>
+                <mat-list-item *ngFor="let item of images">
+                    <img src={{getImagePath(item.image)}} alt="" />
+                    <span>{{item.name}}</span>
+                    <i class="material-icons" (click)="delete(item.id)">delete</i>
+                </mat-list-item>
+            </mat-list>
+        
+            <button mat-raised-button color="primary" (click)="openDialog()">Add image</button>
+        </div>
+    </mat-expansion-panel>
+</div>

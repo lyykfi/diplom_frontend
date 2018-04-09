@@ -1,1 +1,17 @@
-<p>editor</p>
+<div id="editor">
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Editor</mat-panel-title>
+            <mat-panel-description *ngIf="!selectedObject">
+                Select object please
+            </mat-panel-description>
+            <mat-panel-description *ngIf="selectedObject">
+                Selected object is: {{selectedObject.name}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="inner">
+            <div id="editor_inline"></div>
+        </div>
+    </mat-expansion-panel>
+</div>

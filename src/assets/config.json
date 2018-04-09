@@ -1,4 +1,5 @@
 {
   "basePath": "http://localhost:2121/",
-  "objects": "api/objects"
+  "objects": "api/objects",
+  "images": "api/images"
 }

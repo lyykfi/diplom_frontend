@@ -11,7 +11,8 @@
             <mat-list>
                 <mat-list-item *ngFor="let item of objects">
                     <img src={{getImagePath(item.image)}} alt="" />
-                    <span>{{item.name}}</span>
+                    <span *ngIf="!selectedObject || (selectedObject && selectedObject.id !== item.id)" (click)="selectObject(item)">{{item.name}}</span>
+                    <strong *ngIf="selectedObject && selectedObject.id === item.id">{{item.name}}</strong>
                     <i class="material-icons" (click)="delete(item.id)">delete</i>
                 </mat-list-item>
             </mat-list>

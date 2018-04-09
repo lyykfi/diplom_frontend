@@ -1,23 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ObjectsDialogsAddComponent } from './dialogs/add/index.component';
-import { ObjectsService, Objects } from '../../objects.service';
+import { ImagesDialogsAddComponent } from './dialogs/add/index.component';
+import { ImagesService, Images } from '../../images.service';
 import { ConfigService, Config } from '../../config/config.service';
 
 @Component({
-  selector: 'app-objects',
+  selector: 'app-images',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class ObjectsComponent implements OnInit {
-  @Input('selectedObject') selectedObject: Objects | null;
-
-  @Output() updateObject: EventEmitter<any> = new EventEmitter<any>();
-
+export class ImagesComponent implements OnInit {
   /**
    *
    */
-  objects: Objects[];
+  images: Images[];
 
   /**
    *
@@ -29,7 +25,7 @@ export class ObjectsComponent implements OnInit {
    * @param dialog
    */
   constructor(public dialog: MatDialog,
-              public objectsService: ObjectsService,
+              public imagesService: ImagesService,
               public configService: ConfigService) {}
 
   /**
@@ -40,10 +36,10 @@ export class ObjectsComponent implements OnInit {
   }
 
   private async fetch() {
-    const result: any = await this.objectsService.all();
+    const result: any = await this.imagesService.all();
     const config: any = await this.configService.getConfig();
 
-    this.objects = result;
+    this.images = result;
     this.config = config;
   }
 
@@ -51,7 +47,7 @@ export class ObjectsComponent implements OnInit {
    *
    */
   openDialog(): void {
-    const dialogRef = this.dialog.open(ObjectsDialogsAddComponent, {
+    const dialogRef = this.dialog.open(ImagesDialogsAddComponent, {
       width: '250px',
       data: { }
     });
@@ -70,14 +66,8 @@ export class ObjectsComponent implements OnInit {
   }
 
   private async delete(id: string) {
-    await this.objectsService.remove(id);
+    await this.imagesService.remove(id);
 
     this.fetch();
-  }
-
-  private selectObject(objects: Objects) {
-    this.selectedObject = objects;
-
-    this.updateObject.emit(this.selectedObject);
   }
 }
