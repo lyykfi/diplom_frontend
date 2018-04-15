@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ObjectsDialogsAddComponent } from './dialogs/add/index.component';
-import { ObjectsService, Objects } from '../../objects.service';
+import { ObjectsService, Objects } from 'app/services/objects.service';
 import { ConfigService, Config } from '../../config/config.service';
 
 @Component({

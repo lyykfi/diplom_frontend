@@ -5,9 +5,7 @@
         </mat-expansion-panel-header>
 
         <div class="inner">
-            <i class="material-icons">open_with</i>
-            <i class="material-icons">3d_rotation</i>
-            <i class="material-icons">create</i>
+            <i [class.current]="selectedItem && item.id === selectedItem.id" (click)="selectTool(item)" class="material-icons" *ngFor="let item of items">{{item.icon}}</i>
         </div>
     </mat-expansion-panel>
 </div>

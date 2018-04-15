@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ObjectsService } from 'app/objects.service';
+import { ObjectsService } from 'app/services/objects.service';
 
 @Component({
   selector: 'app-objects-dialog-add',

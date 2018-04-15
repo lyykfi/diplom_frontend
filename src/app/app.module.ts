@@ -12,17 +12,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AppComponent } from './app.component';
-import { ObjectsComponent } from './components/objects/index.component';
-import { ObjectsDialogsAddComponent } from './components/objects/dialogs/add/index.component';
-import { EditorComponent } from './components/editor/index.component';
-import { PanelComponent } from './components/panel/index.component';
+import { AppComponent } from 'app/app.component';
+import { ObjectsComponent } from 'app/components/objects/index.component';
+import { ObjectsDialogsAddComponent } from 'app/components/objects/dialogs/add/index.component';
+import { EditorComponent } from 'app/components/editor/index.component';
+import { PanelComponent } from 'app/components/panel/index.component';
 
-import { ImagesComponent } from './components/images/index.component';
-import { ImagesDialogsAddComponent } from './components/images/dialogs/add/index.component';
+import { ImagesComponent } from 'app/components/images/index.component';
+import { ImagesDialogsAddComponent } from 'app/components/images/dialogs/add/index.component';
 
-import { ObjectsService } from './objects.service';
-import { ConfigService } from './config/config.service';
+import { ObjectsService } from 'app/services/objects.service';
+import { ImagesService } from 'app/services/images.service';
+import { ConfigService } from 'app/config/config.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ConfigService } from './config/config.service';
   providers: [
     ObjectsService,
     ConfigService,
+    ImagesService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

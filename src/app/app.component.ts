@@ -1,17 +1,27 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Objects } from './objects.service';
+import { Objects } from 'app/services/objects.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  selectedObject: Objects | null;
+    /**
+     *
+     */
+    selectedObject: Objects | null;
 
-  title = 'app';
+    /**
+     *
+     */
+    title = 'app';
 
-  onUpdateObject(date: any) {
-    this.selectedObject = date;
-  }
+    /**
+     *
+     * @param date
+     */
+    onUpdateObject(date: any) {
+        this.selectedObject = date;
+    }
 }

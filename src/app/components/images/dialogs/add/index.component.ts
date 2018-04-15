@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ImagesService } from 'app/images.service';
+import { ImagesService } from 'app/services/images.service';
 
 @Component({
   selector: 'app-images-dialog-add',

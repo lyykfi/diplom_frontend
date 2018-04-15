@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService, Config } from './config/config.service';
+import { ConfigService, Config } from 'app/config/config.service';
 
-export interface Images {
+export interface Objects {
   name: string;
+  object: string;
   image: string;
 }
 
 @Injectable()
-export class ImagesService {
+export class ObjectsService {
 
   /**
    *
@@ -25,11 +26,11 @@ export class ImagesService {
    * @param object
    * @param preview
    */
-  async add(name: string, image: string) {
+  async add(name: string, object: string, image: string) {
     const config: Config = await this.configService.getConfig();
 
-    const result = this.http.post<Object>(config.basePath + config.images, {
-      name, image
+    const result = this.http.post<Object>(config.basePath + config.objects, {
+      name, object, image
     }, {}).toPromise();
   }
 
@@ -39,7 +40,7 @@ export class ImagesService {
   async remove(id: string) {
     const config: Config = await this.configService.getConfig();
 
-    return this.http.delete<Object>(config.basePath + config.images + '/' + id, {}).toPromise();
+    return this.http.delete<Object>(config.basePath + config.objects + '/' + id, {}).toPromise();
   }
 
   /**
@@ -48,6 +49,6 @@ export class ImagesService {
   async all() {
     const config: Config = await this.configService.getConfig();
 
-    return this.http.get<Images>(config.basePath + config.objects, {}).toPromise();
+    return this.http.get<Objects>(config.basePath + config.objects, {}).toPromise();
   }
 }

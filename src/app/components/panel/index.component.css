@@ -5,3 +5,12 @@
 #tools .material-icons {
     margin-right: 1rem;
 }
+
+#tools .material-icons {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#tools .material-icons.current {
+    background: rgba(0, 0, 0, 0.2);
+}

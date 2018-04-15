@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { Objects } from '../../objects.service';
+import { Objects } from 'app/services/objects.service';
 import * as THREE from 'three';
 import OBJLoader from 'three-obj-loader';
 import { ConfigService, Config } from '../../config/config.service';
@@ -72,6 +72,9 @@ export class EditorComponent implements OnChanges, OnInit {
     const editor = document.getElementById('editor_inline');
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera( 45, editor.offsetWidth / editor.offsetHeight, 1, 2000 );
+    this.camera.aspect = editor.offsetWidth / window.innerHeight;
+    this.camera.position.z = 600;
+    this.camera.updateProjectionMatrix();
     const ambient = new THREE.AmbientLight( 0x101030 );
     this.scene.add( ambient );
 
@@ -90,7 +93,7 @@ export class EditorComponent implements OnChanges, OnInit {
   }
 
   render() {
-    // this.camera.lookAt( this.scene.position );
+    this.camera.lookAt( this.scene.position );
 
     this.renderer.render( this.scene, this.camera );
   }

@@ -1,0 +1,16 @@
+#images img {
+    max-height: 100%;
+    padding-right: 10px;
+}
+
+#images .material-icons {
+    cursor: pointer;
+}
+
+#images .mat-list-item span {
+    cursor: pointer;
+}
+
+#images button {
+    margin-top: 10px;
+}
