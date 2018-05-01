@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Objects } from 'app/services/objects.service';
+import { IPanelItem } from './components/panel/index.component';
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,11 @@ export class AppComponent {
     /**
      *
      */
+    selectedTool: IPanelItem | null;
+
+    /**
+     *
+     */
     title = 'app';
 
     /**
@@ -23,5 +29,14 @@ export class AppComponent {
      */
     onUpdateObject(date: any) {
         this.selectedObject = date;
+    }
+
+    /**
+     *
+     * @param date
+     */
+    onUpdateTool(tool: any) {
+        console.log('onUpdateTool');
+        this.selectedTool = tool;
     }
 }

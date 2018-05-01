@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import Items from './elements';
 
 /**
@@ -7,6 +7,16 @@ import Items from './elements';
 export interface IPanelItem {
     id: string;
     icon: string;
+}
+
+/**
+ *
+ */
+export enum IPanelItemType {
+    MOVE = 'MOVE',
+    ROTATE = 'ROTATE',
+    DRAW = 'DRAW',
+    ZOOM = 'ZOOM',
 }
 
 /**
@@ -21,7 +31,12 @@ export class PanelComponent implements OnInit {
     /**
      *
      */
-    public selectedItem: IPanelItem | null;
+    @Input('selectedTool') selectedTool: IPanelItem | null;
+
+    /**
+     *
+     */
+    @Output() updateTool: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      *
@@ -40,7 +55,8 @@ export class PanelComponent implements OnInit {
      * @param tool
      */
     private selectTool(tool: IPanelItem) {
-        console.log(tool);
-        this.selectedItem = tool;
+        this.selectedTool = tool;
+
+        this.updateTool.emit(this.selectedTool);
     }
 }

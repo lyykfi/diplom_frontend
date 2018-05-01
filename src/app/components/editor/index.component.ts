@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Objects } from 'app/services/objects.service';
-import * as THREE from 'three';
-import OBJLoader from 'three-obj-loader';
 import { ConfigService, Config } from '../../config/config.service';
+import { IPanelItem, IPanelItemType } from '../panel/index.component';
+import * as BABYLON from 'babylonjs';
+import 'babylonjs-loaders';
 
 @Component({
   selector: 'app-editor',
@@ -10,103 +11,96 @@ import { ConfigService, Config } from '../../config/config.service';
   styleUrls: ['./index.component.css']
 })
 export class EditorComponent implements OnChanges, OnInit {
-
-  renderer: THREE.WebGLRenderer;
-  camera: THREE.PerspectiveCamera;
+  /**
+   *
+   */
   @Input('selectedObject') selectedObject: Objects | null;
 
+  /**
+   *
+   */
+  @Input('selectedTool') selectedTool: IPanelItem | null;
+
+  /**
+   *
+   */
   scene: any;
+
+  /**
+   *
+   */
+  renderer: THREE.WebGLRenderer;
+
+  /**
+   *
+   */
+  camera: any;
+
+  /**
+   *
+   */
+  engine: any;
 
   /**
    *
    */
   config: Config;
 
+  /**
+   * @method constructor
+   * @param configService
+   */
   constructor(public configService: ConfigService) {}
 
-  ngOnChanges(): void {
-    if (this.selectedObject) {
-      const manager = new THREE.LoadingManager();
-      const loader = new THREE.OBJLoader(manager);
-      const self = this;
+  /**
+   * @method ngOnChanges
+   */
+  async ngOnChanges(changes) {
+    if (changes.selectedObject) {
+      const objPath = this.config.basePath + this.selectedObject.object;
+      const objFileArray = objPath.split('/');
+      const objFilePath = objFileArray[objFileArray.length - 1];
 
-      console.log(this.config);
+      BABYLON.SceneLoader.Load(objPath.replace(`${objFilePath}`, ''), objFilePath, this.engine,  (scene) => {
+        scene.createDefaultCameraOrLight(true, true, true);
 
-      loader.load(
-          // resource URL
-          this.config.basePath + this.selectedObject.object,
-
-          // onLoad callback
-          // Here the loaded data is assumed to be an object
-          function ( obj ) {
-            obj.position.x = - 60;
-            obj.rotation.x = 20 * Math.PI / 180;
-            obj.rotation.z = 20 * Math.PI / 180;
-            obj.scale.x = 30;
-            obj.scale.y = 30;
-            obj.scale.z = 30;
-
-            self.scene.add( obj );
-          },
-
-          // onProgress callback
-          function ( xhr ) {
-            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-          },
-
-          // onError callback
-          function ( err ) {
-            console.error( 'An error happened' );
-          }
-      );
+        this.scene = scene;
+      });
     }
   }
 
+  /**
+   * @method ngOnInit
+   */
   async ngOnInit() {
     const config: any = await this.configService.getConfig();
-
     this.config = config;
 
-    OBJLoader(THREE);
+    if (!this.engine) {
+      this.createScene();
 
-    const editor = document.getElementById('editor_inline');
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera( 45, editor.offsetWidth / editor.offsetHeight, 1, 2000 );
-    this.camera.aspect = editor.offsetWidth / window.innerHeight;
-    this.camera.position.z = 600;
-    this.camera.updateProjectionMatrix();
-    const ambient = new THREE.AmbientLight( 0x101030 );
-    this.scene.add( ambient );
+      this.engine.runRenderLoop(() => {
+        this.scene.render();
+      });
 
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize( editor.offsetWidth, window.innerHeight );
-    editor.appendChild( this.renderer.domElement );
-
-    window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
-
-    this.animate();
+      window.addEventListener('resize', () => {
+        this.engine.resize();
+      });
+    }
   }
 
-  animate() {
-    requestAnimationFrame( this.animate.bind(this) );
-    this.render();
-  }
+  /**
+   * @method createScene
+   */
+  private createScene() {
+    const canvas = document.getElementById('editor_inline');
 
-  render() {
-    this.camera.lookAt( this.scene.position );
+    if (canvas) {
+      this.engine = new BABYLON.Engine(canvas as HTMLCanvasElement, true);
+      this.scene = new BABYLON.Scene(this.engine);
 
-    this.renderer.render( this.scene, this.camera );
-  }
-
-  onWindowResize() {
-    const editor = document.getElementById('editor_inline');
-
-    const windowHalfX = editor.offsetWidth / 2;
-    const windowHalfY = editor.offsetHeight / 2;
-
-    this.camera.aspect = editor.offsetWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-
-    this.renderer.setSize( editor.offsetWidth, window.innerHeight );
+      this.camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 5, -10), this.scene);
+      this.camera.setTarget(BABYLON.Vector3.Zero());
+    }
   }
 }

@@ -1,9 +1,10 @@
 <div id="app">
   <div id="left">
-    <app-panel></app-panel>
+    <app-panel [(selectedTool)]="selectedTool" (updateTool)="onUpdateTool($event)"></app-panel>
+    <app-tool [(selectedTool)]="selectedTool"></app-tool>
     <app-images></app-images>
   </div>
   
-  <app-editor id="center" [(selectedObject)]="selectedObject"></app-editor>
+  <app-editor id="center" [(selectedObject)]="selectedObject" [(selectedTool)]="selectedTool"></app-editor>
   <app-objects id="right" [(selectedObject)]="selectedObject" (updateObject)="onUpdateObject($event)"></app-objects>
 </div>

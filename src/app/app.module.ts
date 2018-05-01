@@ -24,6 +24,8 @@ import { ImagesDialogsAddComponent } from 'app/components/images/dialogs/add/ind
 import { ObjectsService } from 'app/services/objects.service';
 import { ImagesService } from 'app/services/images.service';
 import { ConfigService } from 'app/config/config.service';
+import { ToolComponent } from './components/tool/index.component';
+import { ToolTextComponent } from './components/tool/text/index.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ConfigService } from 'app/config/config.service';
     ObjectsDialogsAddComponent,
     ImagesComponent,
     ImagesDialogsAddComponent,
+    ToolComponent,
+    ToolTextComponent,
   ],
   imports: [
     HttpClientModule,
