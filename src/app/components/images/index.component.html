@@ -10,7 +10,7 @@
         <div class="inner">
             <mat-list>
                 <mat-list-item *ngFor="let item of images">
-                    <img src={{getImagePath(item.image)}} alt="" />
+                    <img (click)="addImage(item.image)" src={{getImagePath(item.image)}} alt="" />
                     <span>{{item.name}}</span>
                     <i class="material-icons" (click)="delete(item.id)">delete</i>
                 </mat-list-item>

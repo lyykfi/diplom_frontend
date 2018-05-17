@@ -14,3 +14,7 @@
 #images button {
     margin-top: 10px;
 }
+
+#images .inner img {
+    cursor: pointer;
+}

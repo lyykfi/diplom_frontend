@@ -1,10 +1,10 @@
 <div id="app">
   <div id="left">
     <app-panel [(selectedTool)]="selectedTool" (updateTool)="onUpdateTool($event)"></app-panel>
-    <app-tool [(selectedTool)]="selectedTool"></app-tool>
-    <app-images></app-images>
+    <app-tool [(selectedTool)]="selectedTool" [(scene)]="scene" [(camera)]="camera"></app-tool>
+    <app-images [(scene)]="scene" [(camera)]="camera"></app-images>
   </div>
   
-  <app-editor id="center" [(selectedObject)]="selectedObject" [(selectedTool)]="selectedTool"></app-editor>
+  <app-editor id="center" (updateCamera)="onUpdateCamera($event)" (updateScene)="onUpdateScene($event)" (updateObject)="onUpdateObject($event)" [(selectedObject)]="selectedObject" [(selectedTool)]="selectedTool"></app-editor>
   <app-objects id="right" [(selectedObject)]="selectedObject" (updateObject)="onUpdateObject($event)"></app-objects>
 </div>

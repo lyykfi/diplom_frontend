@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -26,6 +26,7 @@ import { ImagesService } from 'app/services/images.service';
 import { ConfigService } from 'app/config/config.service';
 import { ToolComponent } from './components/tool/index.component';
 import { ToolTextComponent } from './components/tool/text/index.component';
+import { ToolBackgroundComponent } from './components/tool/background/index.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +39,12 @@ import { ToolTextComponent } from './components/tool/text/index.component';
     ImagesDialogsAddComponent,
     ToolComponent,
     ToolTextComponent,
+    ToolBackgroundComponent,
   ],
   imports: [
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatExpansionModule,

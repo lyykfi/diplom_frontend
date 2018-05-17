@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ImagesDialogsAddComponent } from './dialogs/add/index.component';
 import { ImagesService, Images } from 'app/services/images.service';
@@ -19,6 +19,16 @@ export class ImagesComponent implements OnInit {
      *
      */
     config: Config;
+
+    /**
+     *
+     */
+    @Input('scene') scene: any;
+
+    /**
+     *
+     */
+    @Input('camera') camera: any;
 
     /**
      *
@@ -76,5 +86,54 @@ export class ImagesComponent implements OnInit {
         await this.imagesService.remove(id);
 
         this.fetch();
+    }
+
+    /**
+     *
+     * @param image
+     */
+    private addImage(image) {
+        console.log(image);
+        document.body.style.cursor = 'crosshair';
+
+        setTimeout(() => {
+            window.addEventListener('click', this.handleClick.bind(this, image));
+        }, 0);
+    }
+
+    /**
+     *
+     */
+    private handleClick = (image) => {
+        const { rotation } = this.camera;
+
+        // We try to pick an object
+        const pickResult = this.scene.pick(this.scene.pointerX, this.scene.pointerY);
+
+        document.body.style.cursor = 'default';
+
+        if (pickResult && pickResult.hit) {
+            const { pickedPoint } = pickResult;
+            const textureSize = 256;
+            const dir = pickResult.pickedPoint.subtract(this.scene.activeCamera.position);
+            dir.normalize();
+
+            console.log(dir);
+
+            const myDynamicTexture = new BABYLON.Texture(this.config.basePath + image, this.scene);
+
+            this.scene.meshes.forEach((item) => {
+                item.material.diffuseTexture = myDynamicTexture;
+            });
+
+            // const x = (textureSize / 100) * (dir.x * 100);
+            // const y = (textureSize / 100) * (dir.y * 100);
+
+            // console.log((textureSize / (dir.x * 100)), (textureSize / (dir.y * 100)));
+            // myDynamicTexture.drawText(this.value.text, null, null, font, this.value.color, 'white', false, true);
+
+        }
+
+        window.removeEventListener('click', this.handleClick);
     }
 }

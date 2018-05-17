@@ -21,6 +21,16 @@ export class AppComponent {
     /**
      *
      */
+    scene: any;
+
+    /**
+     *
+     */
+    camera: any;
+
+    /**
+     *
+     */
     title = 'app';
 
     /**
@@ -38,5 +48,23 @@ export class AppComponent {
     onUpdateTool(tool: any) {
         console.log('onUpdateTool');
         this.selectedTool = tool;
+    }
+
+    /**
+     *
+     * @param date
+     */
+    onUpdateScene(scene: any) {
+        console.log('onUpdateScene2');
+        this.scene = scene;
+    }
+
+    /**
+     *
+     * @param date
+     */
+    onUpdateCamera(camera: any) {
+        console.log('camera');
+        this.camera = camera;
     }
 }

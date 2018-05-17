@@ -1,6 +1,6 @@
 export default [
     {
-        id: 'DRAW',
+        id: 'BACKGROUND',
         icon: 'create',
     },
     {

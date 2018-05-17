@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Objects } from 'app/services/objects.service';
 import { ConfigService, Config } from '../../config/config.service';
 import { IPanelItem, IPanelItemType } from '../panel/index.component';
@@ -24,12 +24,17 @@ export class EditorComponent implements OnChanges, OnInit {
   /**
    *
    */
-  scene: any;
+  @Output() updateScene: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    *
    */
-  renderer: THREE.WebGLRenderer;
+  @Output() updateCamera: EventEmitter<any> = new EventEmitter<any>();
+
+  /**
+   *
+   */
+  scene: any;
 
   /**
    *
@@ -56,7 +61,7 @@ export class EditorComponent implements OnChanges, OnInit {
    * @method ngOnChanges
    */
   async ngOnChanges(changes) {
-    if (changes.selectedObject) {
+    if (changes.selectedObject && this.config) {
       const objPath = this.config.basePath + this.selectedObject.object;
       const objFileArray = objPath.split('/');
       const objFilePath = objFileArray[objFileArray.length - 1];
@@ -64,7 +69,16 @@ export class EditorComponent implements OnChanges, OnInit {
       BABYLON.SceneLoader.Load(objPath.replace(`${objFilePath}`, ''), objFilePath, this.engine,  (scene) => {
         scene.createDefaultCameraOrLight(true, true, true);
 
+        const myMaterial = new BABYLON.StandardMaterial('Material', scene);
+
+        scene.meshes.forEach((item) => {
+            item.material = myMaterial;
+        });
+
         this.scene = scene;
+
+        this.updateScene.emit(this.scene);
+        this.updateCamera.emit(this.camera);
       });
     }
   }
@@ -101,6 +115,10 @@ export class EditorComponent implements OnChanges, OnInit {
 
       this.camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 5, -10), this.scene);
       this.camera.setTarget(BABYLON.Vector3.Zero());
+
+      console.log('updateCamera 1');
+
+      this.updateCamera.emit(this.camera);
     }
   }
 }

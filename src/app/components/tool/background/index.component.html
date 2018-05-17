@@ -1,0 +1,6 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <mat-form-field>
+        <input type="text" formControlName="color" matInput placeholder="Color" />
+    </mat-form-field>
+    <button (ngSubmit)="addBackground(f.value)" type="submit" mat-raised-button color="primary">Add background</button>
+</form>

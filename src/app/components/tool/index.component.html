@@ -6,7 +6,10 @@
 
         <div class="inner">
             <div *ngIf="selectedTool.id === 'TEXT'">
-                <app-tool-text></app-tool-text>
+                <app-tool-text [(scene)]="scene" [(camera)]="camera"></app-tool-text>
+            </div>
+            <div *ngIf="selectedTool.id === 'BACKGROUND'">
+                <app-tool-background [(scene)]="scene" [(camera)]="camera"></app-tool-background>
             </div>
         </div>
     </mat-expansion-panel>

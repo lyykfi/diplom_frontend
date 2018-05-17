@@ -11,6 +11,17 @@ import { IPanelItem } from '../panel/index.component';
     styleUrls: ['./index.component.css']
 })
 export class ToolComponent {
+
+    /**
+     *
+     */
+    @Input('scene') scene: any;
+
+    /**
+     *
+     */
+    @Input('camera') camera: any;
+
     /**
      *
      */
