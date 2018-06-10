@@ -52,7 +52,9 @@ export class ToolBackgroundComponent implements OnInit {
         const color = BABYLON.Color3.FromHexString(form.value.color);
 
         this.scene.meshes.forEach((item) => {
-            item.material.diffuseColor = color;
+            if (item.material) {
+                item.material.diffuseColor = color;
+            }
         });
 
         // console.log(color);

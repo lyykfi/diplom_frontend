@@ -3,7 +3,10 @@ import { Objects } from 'app/services/objects.service';
 import { ConfigService, Config } from '../../config/config.service';
 import { IPanelItem, IPanelItemType } from '../panel/index.component';
 import * as BABYLON from 'babylonjs';
+import * as moment from 'moment';
+
 import 'babylonjs-loaders';
+import 'babylonjs-serializers';
 
 @Component({
   selector: 'app-editor',
@@ -120,5 +123,40 @@ export class EditorComponent implements OnChanges, OnInit {
 
       this.updateCamera.emit(this.camera);
     }
+  }
+
+  /**
+   * @method export
+   */
+  private export() {
+    const timestamp = moment().format();
+
+    const objFile = BABYLON.OBJExport.OBJ(this.scene.meshes, this.scene.materials, timestamp);
+    const newMesh = BABYLON.Mesh.MergeMeshes(this.scene.meshes);
+
+    const mtl = BABYLON.OBJExport.MTL(newMesh);
+
+    this.fileSave(`${timestamp}.obj`, objFile);
+    this.fileSave(`${timestamp}.mtl`, mtl);
+  }
+
+  /**
+   *
+   * @param name
+   * @param text
+   */
+  private fileSave(name: string, text: any) {
+    const a = document.createElement('a');
+    const file = new Blob([text]);
+
+    a.setAttribute('href', URL.createObjectURL(file));
+    a.setAttribute('download', name);
+
+    document.body.appendChild(a);
+    a.click();
+
+    setTimeout(() => {
+        document.body.removeChild(a);
+    }, 0);
   }
 }

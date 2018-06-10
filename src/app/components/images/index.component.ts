@@ -113,24 +113,16 @@ export class ImagesComponent implements OnInit {
         document.body.style.cursor = 'default';
 
         if (pickResult && pickResult.hit) {
-            const { pickedPoint } = pickResult;
-            const textureSize = 256;
             const dir = pickResult.pickedPoint.subtract(this.scene.activeCamera.position);
             dir.normalize();
-
-            console.log(dir);
 
             const myDynamicTexture = new BABYLON.Texture(this.config.basePath + image, this.scene);
 
             this.scene.meshes.forEach((item) => {
-                item.material.diffuseTexture = myDynamicTexture;
+                if (item.material) {
+                    item.material.diffuseTexture = myDynamicTexture;
+                }
             });
-
-            // const x = (textureSize / 100) * (dir.x * 100);
-            // const y = (textureSize / 100) * (dir.y * 100);
-
-            // console.log((textureSize / (dir.x * 100)), (textureSize / (dir.y * 100)));
-            // myDynamicTexture.drawText(this.value.text, null, null, font, this.value.color, 'white', false, true);
 
         }
 

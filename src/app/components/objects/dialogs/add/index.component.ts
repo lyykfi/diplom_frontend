@@ -25,6 +25,16 @@ export class ObjectsDialogsAddComponent {
 
     /**
      *
+     */
+    uploadedMTL = '';
+
+    /**
+     *
+     */
+    mtlName = '';
+
+    /**
+     *
      * @param dialogRef
      * @param data
      */
@@ -58,6 +68,21 @@ export class ObjectsDialogsAddComponent {
      *
      * @param event
      */
+    uploadMTL(event): void {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.readAsBinaryString(file);
+        reader.onload = (onloadEvent: any) => {
+            this.mtlName = file.name;
+            this.uploadedMTL = btoa(onloadEvent.target.result);
+        };
+    }
+
+    /**
+     *
+     * @param event
+     */
     uploadPreview(event): void {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -72,7 +97,7 @@ export class ObjectsDialogsAddComponent {
      *
      */
     async upload() {
-        await this.objectsService.add(this.name, this.uploadedObject, this.uploadedPreview);
+        await this.objectsService.add(this.name, this.uploadedObject, this.uploadedPreview, this.uploadedMTL, this.mtlName);
 
         this.dialogRef.close();
     }

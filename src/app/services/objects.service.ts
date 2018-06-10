@@ -6,6 +6,7 @@ export interface Objects {
   name: string;
   object: string;
   image: string;
+  mtl: string;
 }
 
 @Injectable()
@@ -26,11 +27,11 @@ export class ObjectsService {
    * @param object
    * @param preview
    */
-  async add(name: string, object: string, image: string) {
+  async add(name: string, object: string, image: string, mtl: string, mtlName: string) {
     const config: Config = await this.configService.getConfig();
 
     const result = this.http.post<Object>(config.basePath + config.objects, {
-      name, object, image
+      name, object, image, mtl, mtl_name: mtlName,
     }, {}).toPromise();
   }
 

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js add @types/oimo
+  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js build
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
@@ -41,10 +41,15 @@ npm manifest:
       "@angular/platform-browser-dynamic": "^5.0.0",
       "@angular/router": "^5.0.0",
       "@types/babylonjs": "^2.4.1",
+      "@types/moment": "^2.13.0",
       "@types/three": "^0.91.6",
       "babylonjs": "^3.2.0",
       "babylonjs-loaders": "^3.2.0",
+      "babylonjs-serializers": "^3.2.0",
+      "cannon": "^0.6.2",
       "core-js": "^2.4.1",
+      "earcut": "^2.1.3",
+      "moment": "^2.22.1",
       "oimo": "^1.0.9",
       "rxjs": "^5.5.2",
       "three": "^0.91.0",
@@ -292,6 +297,12 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/jasminewd2/-/jasminewd2-2.0.3.tgz#0d2886b0cbdae4c0eeba55e30792f584bf040a95"
     dependencies:
       "@types/jasmine" "*"
+  
+  "@types/moment@^2.13.0":
+    version "2.13.0"
+    resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+    dependencies:
+      moment "*"
   
   "@types/node@^6.0.46", "@types/node@~6.0.60":
     version "6.0.104"
@@ -709,6 +720,12 @@ Lockfile:
     dependencies:
       babylonjs-gltf2interface "3.2.0"
   
+  babylonjs-serializers@^3.2.0:
+    version "3.2.0"
+    resolved "https://registry.yarnpkg.com/babylonjs-serializers/-/babylonjs-serializers-3.2.0.tgz#645e93a2477dd5aa484bf7f0683aa4842dcf461a"
+    dependencies:
+      babylonjs-gltf2interface "3.2.0"
+  
   babylonjs@*, babylonjs@^3.2.0:
     version "3.2.0"
     resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.2.0.tgz#14cb71f27adaae1b071a03bd0d292b0fe07e448e"
@@ -1056,6 +1073,10 @@ Lockfile:
   caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
     version "1.0.30000824"
     resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000824.tgz#bba3ff425296e04caa37fe426259206a7056551b"
+  
+  cannon@^0.6.2:
+    version "0.6.2"
+    resolved "https://registry.yarnpkg.com/cannon/-/cannon-0.6.2.tgz#1e7bc72dd5841982f3c104c2bc578bfa4fb1c572"
   
   caseless@~0.11.0:
     version "0.11.0"
@@ -1905,6 +1926,10 @@ Lockfile:
       inherits "^2.0.1"
       readable-stream "^2.0.0"
       stream-shift "^1.0.0"
+  
+  earcut@^2.1.3:
+    version "2.1.3"
+    resolved "https://registry.yarnpkg.com/earcut/-/earcut-2.1.3.tgz#ca579545f351941af7c3d0df49c9f7d34af99b0c"
   
   ecc-jsbn@~0.1.1:
     version "0.1.1"
@@ -4034,6 +4059,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
     dependencies:
       minimist "0.0.8"
+  
+  moment@*, moment@^2.22.1:
+    version "2.22.1"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
   
   move-concurrently@^1.0.1:
     version "1.0.1"
@@ -6932,11 +6961,16 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.25.tgz#e20e5e85b881e2e66352612b5f238e8309e5badd"
 
 Trace: 
-  Error: Couldn't find package "@types/oimo" on the "npm" registry.
-      at new MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
-      at NpmResolver.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:51625:15)
-      at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:98:30)
-      at /usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:109:13
-      at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:182:7)
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c ng build --prod
+  Directory: /Users/andrey/Work/diplom-client
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:180:13)
+      at maybeClose (internal/child_process.js:936:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

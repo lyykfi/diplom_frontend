@@ -9,6 +9,11 @@
     </div>
 
     <div class="line">
+        <input #mtl type="file" [hidden]="true" (change)="uploadMTL($event)">
+        <button mat-button (click)="mtl.click()">Upload MTL(texture) file</button>
+    </div>
+
+    <div class="line">
         <input #preview type="file" [hidden]="true" (change)="uploadPreview($event)">
         <button mat-button (click)="preview.click()">Upload preview image</button>
     </div>

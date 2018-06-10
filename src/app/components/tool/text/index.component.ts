@@ -76,21 +76,19 @@ export class ToolTextComponent implements OnInit {
             const dir = pickResult.pickedPoint.subtract(this.scene.activeCamera.position);
             dir.normalize();
 
-            console.log(dir);
-
-            const myDynamicTexture = new BABYLON.DynamicTexture('text', { width: textureSize, height: textureSize}, this.scene, true);
+            const myDynamicTexture = new BABYLON.DynamicTexture('text', 512, this.scene, false);
             const font = `normal ${this.value.fontSize}px ${this.value.font}`;
 
             this.scene.meshes.forEach((item) => {
-                item.material.diffuseTexture = myDynamicTexture;
+                if (item.material) {
+                    item.material.diffuseTexture = myDynamicTexture;
+                    item.material.specularColor = new BABYLON.Color3(0, 0, 0);
+                    item.material.backFaceCulling = false;
+                }
             });
 
-            const x = (textureSize / 100) * (dir.x * 100);
-            const y = (textureSize / 100) * (dir.y * 100);
-
-            // console.log((textureSize / (dir.x * 100)), (textureSize / (dir.y * 100)));
-            myDynamicTexture.drawText(this.value.text, null, null, font, this.value.color, 'white', false, true);
-
+            myDynamicTexture.drawText(this.value.text, null, 100, font, this.value.color, 'white', true);
+            myDynamicTexture.update(true);
         }
 
         window.removeEventListener('click', this.handleClick);
