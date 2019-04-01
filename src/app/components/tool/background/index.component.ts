@@ -35,6 +35,12 @@ export class ToolBackgroundComponent implements OnInit {
      */
     @Input('camera') camera: any;
 
+    addText: any;
+
+    f: any;
+
+    addBackground: any;
+
     /**
      *
      */

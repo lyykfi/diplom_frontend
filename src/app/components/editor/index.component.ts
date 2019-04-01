@@ -128,7 +128,7 @@ export class EditorComponent implements OnChanges, OnInit {
   /**
    * @method export
    */
-  private export() {
+  public export() {
     const timestamp = moment().format();
 
     const objFile = BABYLON.OBJExport.OBJ(this.scene.meshes, this.scene.materials, timestamp);

@@ -35,6 +35,10 @@ export class ToolTextComponent implements OnInit {
      */
     @Input('camera') camera: any;
 
+    addText: any;
+
+    f: any;
+
     /**
      *
      */
